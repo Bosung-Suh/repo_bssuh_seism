@@ -1,0 +1,65 @@
+Model: "sequential"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+conv2d (Conv2D)              (None, 1, 6000, 32)       416       
+_________________________________________________________________
+max_pooling2d (MaxPooling2D) (None, 1, 3000, 32)       0         
+_________________________________________________________________
+conv2d_1 (Conv2D)            (None, 1, 3000, 64)       8256      
+_________________________________________________________________
+max_pooling2d_1 (MaxPooling2 (None, 1, 1500, 64)       0         
+_________________________________________________________________
+conv2d_2 (Conv2D)            (None, 1, 1500, 128)      32896     
+_________________________________________________________________
+max_pooling2d_2 (MaxPooling2 (None, 1, 750, 128)       0         
+_________________________________________________________________
+conv2d_3 (Conv2D)            (None, 1, 750, 256)       131328    
+_________________________________________________________________
+max_pooling2d_3 (MaxPooling2 (None, 1, 375, 256)       0         
+_________________________________________________________________
+conv2d_4 (Conv2D)            (None, 1, 375, 512)       524800    
+_________________________________________________________________
+max_pooling2d_4 (MaxPooling2 (None, 1, 188, 512)       0         
+_________________________________________________________________
+conv2d_5 (Conv2D)            (None, 1, 188, 1024)      2098176   
+_________________________________________________________________
+max_pooling2d_5 (MaxPooling2 (None, 1, 94, 1024)       0         
+_________________________________________________________________
+flatten (Flatten)            (None, 96256)             0         
+_________________________________________________________________
+dense (Dense)                (None, 1024)              98567168  
+_________________________________________________________________
+dropout (Dropout)            (None, 1024)              0         
+_________________________________________________________________
+dense_1 (Dense)              (None, 101)               103525    
+=================================================================
+Total params: 101,466,565
+Trainable params: 101,466,565
+Non-trainable params: 0
+_________________________________________________________________
+model info save COMPLETE!
+Total data number is 101437, Data processing took 0:00:40.
+learning rate = 0.001 epoch = 20
+Learning started. It takes sometime.
+Epoch: 1 loss = 0.70260841 train MAE = 4.0149km test MAE = 3.2893km
+Epoch: 2 loss = 0.65064323 train MAE = 2.9930km test MAE = 3.1912km
+Epoch: 3 loss = 0.62224936 train MAE = 2.5527km test MAE = 2.9956km
+Epoch: 4 loss = 0.60016346 train MAE = 2.3681km test MAE = 3.1138km
+Epoch: 5 loss = 0.58210218 train MAE = 2.3287km test MAE = 3.2868km
+Epoch: 6 loss = 0.58344191 train MAE = 2.6939km test MAE = 3.4933km
+Epoch: 7 loss = 0.61459500 train MAE = 3.3275km test MAE = 3.9404km
+Epoch: 8 loss = 0.62109590 train MAE = 3.7409km test MAE = 4.9552km
+Epoch: 9 loss = 0.64854157 train MAE = 5.3028km test MAE = 17.4697km
+Epoch: 10 loss = 0.88755000 train MAE = 18.7899km test MAE = 17.4662km
+Epoch: 11 loss = 0.88751960 train MAE = 18.6663km test MAE = 17.6984km
+Epoch: 12 loss = 0.88751900 train MAE = 18.2164km test MAE = 19.5633km
+Epoch: 13 loss = 0.88751680 train MAE = 18.3449km test MAE = 19.5648km
+Epoch: 14 loss = 0.88750708 train MAE = 18.5071km test MAE = 19.9828km
+Epoch: 15 loss = 0.88751942 train MAE = 18.6838km test MAE = 19.5648km
+Epoch: 16 loss = 0.88752842 train MAE = 18.7152km test MAE = 19.5648km
+Epoch: 17 loss = 0.88748819 train MAE = 18.7933km test MAE = 19.1838km
+Epoch: 18 loss = 0.88747913 train MAE = 18.8659km test MAE = 19.9828km
+Epoch: 19 loss = 0.88747805 train MAE = 18.7034km test MAE = 17.5584km
+Epoch: 20 loss = 0.88747388 train MAE = 18.4561km test MAE = 19.5648km
+Learning Finished! It took 1:28:03.

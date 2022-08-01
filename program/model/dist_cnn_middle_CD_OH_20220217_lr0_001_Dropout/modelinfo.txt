@@ -1,0 +1,57 @@
+Model: "sequential"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+conv2d (Conv2D)              (None, 1, 6000, 32)       416       
+_________________________________________________________________
+max_pooling2d (MaxPooling2D) (None, 1, 3000, 32)       0         
+_________________________________________________________________
+conv2d_1 (Conv2D)            (None, 1, 3000, 64)       8256      
+_________________________________________________________________
+max_pooling2d_1 (MaxPooling2 (None, 1, 1500, 64)       0         
+_________________________________________________________________
+conv2d_2 (Conv2D)            (None, 1, 1500, 128)      32896     
+_________________________________________________________________
+max_pooling2d_2 (MaxPooling2 (None, 1, 750, 128)       0         
+_________________________________________________________________
+conv2d_3 (Conv2D)            (None, 1, 750, 256)       131328    
+_________________________________________________________________
+max_pooling2d_3 (MaxPooling2 (None, 1, 375, 256)       0         
+_________________________________________________________________
+flatten (Flatten)            (None, 96000)             0         
+_________________________________________________________________
+dense (Dense)                (None, 1024)              98305024  
+_________________________________________________________________
+dropout (Dropout)            (None, 1024)              0         
+_________________________________________________________________
+dense_1 (Dense)              (None, 101)               103525    
+=================================================================
+Total params: 98,581,445
+Trainable params: 98,581,445
+Non-trainable params: 0
+_________________________________________________________________
+model info save COMPLETE!
+Total data number is 101437, Data processing took 0:00:54.
+learning rate = 0.0001 epoch = 20
+Learning started. It takes sometime.
+Epoch: 1 loss = 0.71646702 train MAE = 4.6322km test MAE = 4.0350km
+Epoch: 2 loss = 0.64352632 train MAE = 2.8360km test MAE = 3.5638km
+Epoch: 3 loss = 0.54760206 train MAE = 1.0872km test MAE = 3.4155km
+Epoch: 4 loss = 0.43484592 train MAE = 0.3797km test MAE = 3.6092km
+Epoch: 5 loss = 0.32810435 train MAE = 0.1441km test MAE = 3.7373km
+Epoch: 6 loss = 0.25084746 train MAE = 0.0950km test MAE = 3.8921km
+Epoch: 7 loss = 0.20183390 train MAE = 0.0849km test MAE = 4.2740km
+Epoch: 8 loss = 0.16853379 train MAE = 0.1076km test MAE = 4.4820km
+Epoch: 9 loss = 0.14316356 train MAE = 0.1561km test MAE = 4.8714km
+Epoch: 10 loss = 0.12302697 train MAE = 0.2129km test MAE = 5.6506km
+Epoch: 11 loss = 0.10653786 train MAE = 0.3357km test MAE = 8.9980km
+Epoch: 12 loss = 0.09723915 train MAE = 0.4405km test MAE = 8.4288km
+Epoch: 13 loss = 0.09138544 train MAE = 0.5969km test MAE = 5.9744km
+Epoch: 14 loss = 0.08930144 train MAE = 0.7850km test MAE = 7.3277km
+Epoch: 15 loss = 0.08786951 train MAE = 0.8852km test MAE = 7.2351km
+Epoch: 16 loss = 0.08726787 train MAE = 0.9677km test MAE = 6.8960km
+Epoch: 17 loss = 0.08656946 train MAE = 1.1107km test MAE = 6.7245km
+Epoch: 18 loss = 0.08696874 train MAE = 1.2004km test MAE = 7.8502km
+Epoch: 19 loss = 0.08452268 train MAE = 1.3184km test MAE = 6.7827km
+Epoch: 20 loss = 0.08358366 train MAE = 1.3771km test MAE = 7.6930km
+Learning Finished! It took 1:09:35.

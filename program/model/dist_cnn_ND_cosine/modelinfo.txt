@@ -1,0 +1,137 @@
+Model: "sequential"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+conv2d (Conv2D)              (None, 1, 6000, 32)       416       
+_________________________________________________________________
+max_pooling2d (MaxPooling2D) (None, 1, 3000, 32)       0         
+_________________________________________________________________
+conv2d_1 (Conv2D)            (None, 1, 3000, 64)       8256      
+_________________________________________________________________
+max_pooling2d_1 (MaxPooling2 (None, 1, 1500, 64)       0         
+_________________________________________________________________
+conv2d_2 (Conv2D)            (None, 1, 1500, 128)      32896     
+_________________________________________________________________
+max_pooling2d_2 (MaxPooling2 (None, 1, 750, 128)       0         
+_________________________________________________________________
+conv2d_3 (Conv2D)            (None, 1, 750, 256)       131328    
+_________________________________________________________________
+max_pooling2d_3 (MaxPooling2 (None, 1, 375, 256)       0         
+_________________________________________________________________
+flatten (Flatten)            (None, 96000)             0         
+_________________________________________________________________
+dense (Dense)                (None, 1024)              98305024  
+_________________________________________________________________
+dropout (Dropout)            (None, 1024)              0         
+_________________________________________________________________
+dense_1 (Dense)              (None, 101)               103525    
+=================================================================
+Total params: 98,581,445
+Trainable params: 98,581,445
+Non-trainable params: 0
+_________________________________________________________________
+model info save COMPLETE!
+Total data number is 101437, Data processing took 0:01:45.
+learning rate = 0.0001 epoch = 100
+Learning started. It takes sometime.
+Epoch: 1 loss = 0.47356579 train accuracy = 0.2706 test accuracy = 0.2927
+Epoch: 2 loss = 0.37933111 train accuracy = 0.3895 test accuracy = 0.3378
+Epoch: 3 loss = 0.29479775 train accuracy = 0.5358 test accuracy = 0.3704
+Epoch: 4 loss = 0.22404677 train accuracy = 0.6725 test accuracy = 0.3813
+Epoch: 5 loss = 0.16681571 train accuracy = 0.7867 test accuracy = 0.3894
+Epoch: 6 loss = 0.12654097 train accuracy = 0.8602 test accuracy = 0.3822
+Epoch: 7 loss = 0.10209621 train accuracy = 0.8923 test accuracy = 0.3841
+Epoch: 8 loss = 0.08925375 train accuracy = 0.9129 test accuracy = 0.3811
+Epoch: 9 loss = 0.08300628 train accuracy = 0.9245 test accuracy = 0.3798
+Epoch: 10 loss = 0.08128545 train accuracy = 0.9332 test accuracy = 0.3825
+Epoch: 11 loss = 0.07894937 train accuracy = 0.9398 test accuracy = 0.3685
+Epoch: 12 loss = 0.08000921 train accuracy = 0.9465 test accuracy = 0.3736
+Epoch: 13 loss = 0.08101562 train accuracy = 0.9515 test accuracy = 0.3815
+Epoch: 14 loss = 0.08164065 train accuracy = 0.9549 test accuracy = 0.3570
+Epoch: 15 loss = 0.08353951 train accuracy = 0.9573 test accuracy = 0.3704
+Epoch: 16 loss = 0.08529804 train accuracy = 0.9584 test accuracy = 0.3599
+Epoch: 17 loss = 0.08739033 train accuracy = 0.9606 test accuracy = 0.3677
+Epoch: 18 loss = 0.08933556 train accuracy = 0.9614 test accuracy = 0.3525
+Epoch: 19 loss = 0.08865573 train accuracy = 0.9634 test accuracy = 0.3566
+Epoch: 20 loss = 0.09040721 train accuracy = 0.9650 test accuracy = 0.3603
+Epoch: 21 loss = 0.09251967 train accuracy = 0.9652 test accuracy = 0.3570
+Epoch: 22 loss = 0.09408066 train accuracy = 0.9655 test accuracy = 0.3551
+Epoch: 23 loss = 0.09562079 train accuracy = 0.9662 test accuracy = 0.3461
+Epoch: 24 loss = 0.09702707 train accuracy = 0.9671 test accuracy = 0.3342
+Epoch: 25 loss = 0.09902468 train accuracy = 0.9678 test accuracy = 0.3383
+Epoch: 26 loss = 0.09858399 train accuracy = 0.9683 test accuracy = 0.3385
+Epoch: 27 loss = 0.09829483 train accuracy = 0.9684 test accuracy = 0.3397
+Epoch: 28 loss = 0.10103427 train accuracy = 0.9695 test accuracy = 0.3400
+Epoch: 29 loss = 0.10125922 train accuracy = 0.9692 test accuracy = 0.3300
+Epoch: 30 loss = 0.10143902 train accuracy = 0.9688 test accuracy = 0.3356
+Epoch: 31 loss = 0.10153345 train accuracy = 0.9692 test accuracy = 0.3416
+Epoch: 32 loss = 0.10285352 train accuracy = 0.9697 test accuracy = 0.3270
+Epoch: 33 loss = 0.10327190 train accuracy = 0.9699 test accuracy = 0.3255
+Epoch: 34 loss = 0.10674085 train accuracy = 0.9699 test accuracy = 0.3205
+Epoch: 35 loss = 0.10739164 train accuracy = 0.9698 test accuracy = 0.3080
+Epoch: 36 loss = 0.10607011 train accuracy = 0.9700 test accuracy = 0.3260
+Epoch: 37 loss = 0.10907834 train accuracy = 0.9693 test accuracy = 0.3281
+Epoch: 38 loss = 0.10712717 train accuracy = 0.9696 test accuracy = 0.3261
+Epoch: 39 loss = 0.11005368 train accuracy = 0.9695 test accuracy = 0.3067
+Epoch: 40 loss = 0.11052724 train accuracy = 0.9695 test accuracy = 0.3268
+Epoch: 41 loss = 0.10957314 train accuracy = 0.9697 test accuracy = 0.3229
+Epoch: 42 loss = 0.11009095 train accuracy = 0.9702 test accuracy = 0.3204
+Epoch: 43 loss = 0.10967086 train accuracy = 0.9701 test accuracy = 0.3184
+Epoch: 44 loss = 0.11011840 train accuracy = 0.9699 test accuracy = 0.3233
+Epoch: 45 loss = 0.11245845 train accuracy = 0.9690 test accuracy = 0.3171
+Epoch: 46 loss = 0.10971733 train accuracy = 0.9698 test accuracy = 0.3167
+Epoch: 47 loss = 0.10779571 train accuracy = 0.9697 test accuracy = 0.3174
+Epoch: 48 loss = 0.11142924 train accuracy = 0.9696 test accuracy = 0.3186
+Epoch: 49 loss = 0.11238041 train accuracy = 0.9691 test accuracy = 0.3175
+Epoch: 50 loss = 0.11224791 train accuracy = 0.9698 test accuracy = 0.3214
+Epoch: 51 loss = 0.11280295 train accuracy = 0.9696 test accuracy = 0.3199
+Epoch: 52 loss = 0.11188903 train accuracy = 0.9695 test accuracy = 0.3155
+Epoch: 53 loss = 0.11350720 train accuracy = 0.9689 test accuracy = 0.3026
+Epoch: 54 loss = 0.11223382 train accuracy = 0.9692 test accuracy = 0.3203
+Epoch: 55 loss = 0.11300828 train accuracy = 0.9698 test accuracy = 0.3165
+Epoch: 56 loss = 0.11400867 train accuracy = 0.9693 test accuracy = 0.3145
+Epoch: 57 loss = 0.11311932 train accuracy = 0.9693 test accuracy = 0.3218
+Epoch: 58 loss = 0.11479627 train accuracy = 0.9694 test accuracy = 0.3023
+Epoch: 59 loss = 0.11399082 train accuracy = 0.9688 test accuracy = 0.3123
+Epoch: 60 loss = 0.11578074 train accuracy = 0.9684 test accuracy = 0.3234
+Epoch: 61 loss = 0.11630132 train accuracy = 0.9686 test accuracy = 0.3134
+Epoch: 62 loss = 0.11536972 train accuracy = 0.9686 test accuracy = 0.3145
+Epoch: 63 loss = 0.11532076 train accuracy = 0.9684 test accuracy = 0.3119
+Epoch: 64 loss = 0.11647145 train accuracy = 0.9683 test accuracy = 0.3014
+Epoch: 65 loss = 0.11622754 train accuracy = 0.9685 test accuracy = 0.3130
+Epoch: 66 loss = 0.11675749 train accuracy = 0.9682 test accuracy = 0.3147
+Epoch: 67 loss = 0.11427014 train accuracy = 0.9683 test accuracy = 0.3088
+Epoch: 68 loss = 0.11603656 train accuracy = 0.9688 test accuracy = 0.3021
+Epoch: 69 loss = 0.11633575 train accuracy = 0.9685 test accuracy = 0.3068
+Epoch: 70 loss = 0.11501123 train accuracy = 0.9683 test accuracy = 0.3147
+Epoch: 71 loss = 0.11581493 train accuracy = 0.9687 test accuracy = 0.3102
+Epoch: 72 loss = 0.11665299 train accuracy = 0.9678 test accuracy = 0.3159
+Epoch: 73 loss = 0.11341075 train accuracy = 0.9685 test accuracy = 0.3096
+Epoch: 74 loss = 0.11574256 train accuracy = 0.9679 test accuracy = 0.3112
+Epoch: 75 loss = 0.11544036 train accuracy = 0.9686 test accuracy = 0.3117
+Epoch: 76 loss = 0.11332674 train accuracy = 0.9693 test accuracy = 0.3152
+Epoch: 77 loss = 0.11651736 train accuracy = 0.9682 test accuracy = 0.3067
+Epoch: 78 loss = 0.11750689 train accuracy = 0.9679 test accuracy = 0.3137
+Epoch: 79 loss = 0.11515810 train accuracy = 0.9686 test accuracy = 0.3096
+Epoch: 80 loss = 0.11596680 train accuracy = 0.9689 test accuracy = 0.3139
+Epoch: 81 loss = 0.11622130 train accuracy = 0.9684 test accuracy = 0.3122
+Epoch: 82 loss = 0.11631480 train accuracy = 0.9681 test accuracy = 0.3015
+Epoch: 83 loss = 0.11618079 train accuracy = 0.9680 test accuracy = 0.3039
+Epoch: 84 loss = 0.11857215 train accuracy = 0.9675 test accuracy = 0.3074
+Epoch: 85 loss = 0.11898112 train accuracy = 0.9667 test accuracy = 0.3072
+Epoch: 86 loss = 0.11860920 train accuracy = 0.9672 test accuracy = 0.3105
+Epoch: 87 loss = 0.11977291 train accuracy = 0.9676 test accuracy = 0.3167
+Epoch: 88 loss = 0.11812993 train accuracy = 0.9676 test accuracy = 0.3096
+Epoch: 89 loss = 0.11805424 train accuracy = 0.9673 test accuracy = 0.3084
+Epoch: 90 loss = 0.11911944 train accuracy = 0.9669 test accuracy = 0.3183
+Epoch: 91 loss = 0.11647797 train accuracy = 0.9680 test accuracy = 0.3043
+Epoch: 92 loss = 0.11785053 train accuracy = 0.9675 test accuracy = 0.3141
+Epoch: 93 loss = 0.11817240 train accuracy = 0.9673 test accuracy = 0.3160
+Epoch: 94 loss = 0.11689853 train accuracy = 0.9675 test accuracy = 0.3070
+Epoch: 95 loss = 0.11921080 train accuracy = 0.9664 test accuracy = 0.3121
+Epoch: 96 loss = 0.11770129 train accuracy = 0.9672 test accuracy = 0.3238
+Epoch: 97 loss = 0.11903833 train accuracy = 0.9670 test accuracy = 0.3087
+Epoch: 98 loss = 0.11852265 train accuracy = 0.9671 test accuracy = 0.3150
+Epoch: 99 loss = 0.11725108 train accuracy = 0.9679 test accuracy = 0.3129
+Epoch: 100 loss = 0.11683985 train accuracy = 0.9672 test accuracy = 0.3119
+Learning Finished! It took 5:46:13.

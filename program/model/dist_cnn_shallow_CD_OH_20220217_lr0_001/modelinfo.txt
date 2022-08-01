@@ -1,0 +1,49 @@
+Model: "sequential"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+conv2d (Conv2D)              (None, 1, 6000, 32)       416       
+_________________________________________________________________
+max_pooling2d (MaxPooling2D) (None, 1, 3000, 32)       0         
+_________________________________________________________________
+conv2d_1 (Conv2D)            (None, 1, 3000, 64)       8256      
+_________________________________________________________________
+max_pooling2d_1 (MaxPooling2 (None, 1, 1500, 64)       0         
+_________________________________________________________________
+flatten (Flatten)            (None, 96000)             0         
+_________________________________________________________________
+dense (Dense)                (None, 1024)              98305024  
+_________________________________________________________________
+dropout (Dropout)            (None, 1024)              0         
+_________________________________________________________________
+dense_1 (Dense)              (None, 101)               103525    
+=================================================================
+Total params: 98,417,221
+Trainable params: 98,417,221
+Non-trainable params: 0
+_________________________________________________________________
+model info save COMPLETE!
+Total data number is 101437, Data processing took 0:00:40.
+learning rate = 0.001 epoch = 20
+Learning started. It takes sometime.
+Epoch: 1 loss = 0.71884239 train MAE = 4.5896km test MAE = 4.1878km
+Epoch: 2 loss = 0.64030021 train MAE = 2.6598km test MAE = 4.0015km
+Epoch: 3 loss = 0.54015690 train MAE = 1.4918km test MAE = 4.5722km
+Epoch: 4 loss = 0.45787710 train MAE = 1.2207km test MAE = 4.7866km
+Epoch: 5 loss = 0.40724620 train MAE = 1.1835km test MAE = 5.7728km
+Epoch: 6 loss = 0.38095102 train MAE = 1.2722km test MAE = 6.7314km
+Epoch: 7 loss = 0.36857733 train MAE = 1.3880km test MAE = 7.3208km
+Epoch: 8 loss = 0.36697081 train MAE = 1.5953km test MAE = 6.8354km
+Epoch: 9 loss = 0.37127045 train MAE = 1.8237km test MAE = 7.8369km
+Epoch: 10 loss = 0.37798437 train MAE = 2.0572km test MAE = 8.6264km
+Epoch: 11 loss = 0.38257095 train MAE = 2.3148km test MAE = 7.9571km
+Epoch: 12 loss = 0.38616139 train MAE = 2.4015km test MAE = 6.8048km
+Epoch: 13 loss = 0.38661543 train MAE = 2.5079km test MAE = 7.9320km
+Epoch: 14 loss = 0.38877609 train MAE = 2.5093km test MAE = 8.4189km
+Epoch: 15 loss = 0.38682443 train MAE = 2.6174km test MAE = 8.7048km
+Epoch: 16 loss = 0.38708794 train MAE = 2.6897km test MAE = 8.2134km
+Epoch: 17 loss = 0.38645723 train MAE = 2.7262km test MAE = 8.8753km
+Epoch: 18 loss = 0.38718206 train MAE = 2.8245km test MAE = 9.0172km
+Epoch: 19 loss = 0.38503298 train MAE = 2.8758km test MAE = 9.5717km
+Epoch: 20 loss = 0.38269916 train MAE = 2.8689km test MAE = 10.2878km
+Learning Finished! It took 0:58:25.

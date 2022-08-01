@@ -1,0 +1,171 @@
+nohup: ignoring input
+2022-07-07 12:07:55.282706: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.11.0
+2022-07-07 12:08:01.321349: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2022-07-07 12:08:01.323449: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcuda.so.1
+2022-07-07 12:08:01.420780: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:73:00.0 name: GeForce RTX 3090 computeCapability: 8.6
+coreClock: 1.695GHz coreCount: 82 deviceMemorySize: 23.70GiB deviceMemoryBandwidth: 871.81GiB/s
+2022-07-07 12:08:01.423386: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 1 with properties: 
+pciBusID: 0000:d5:00.0 name: GeForce RTX 3090 computeCapability: 8.6
+coreClock: 1.695GHz coreCount: 82 deviceMemorySize: 23.70GiB deviceMemoryBandwidth: 871.81GiB/s
+2022-07-07 12:08:01.423464: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.11.0
+2022-07-07 12:08:01.446305: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.11
+2022-07-07 12:08:01.446419: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.11
+2022-07-07 12:08:01.450578: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2022-07-07 12:08:01.452889: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2022-07-07 12:08:01.470233: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2022-07-07 12:08:01.472746: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.11
+2022-07-07 12:08:01.473589: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.8
+2022-07-07 12:08:01.488308: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0, 1
+  0%|          | 0/101437 [00:00<?, ?it/s] 70%|███████   | 71283/101437 [00:00<00:00, 712803.49it/s]100%|██████████| 101437/101437 [00:00<00:00, 771181.26it/s]2022-07-07 12:08:47.878313: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 AVX512F FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2022-07-07 12:08:47.881500: I tensorflow/compiler/jit/xla_gpu_device.cc:99] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2022-07-07 12:08:47.884816: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:73:00.0 name: GeForce RTX 3090 computeCapability: 8.6
+coreClock: 1.695GHz coreCount: 82 deviceMemorySize: 23.70GiB deviceMemoryBandwidth: 871.81GiB/s
+2022-07-07 12:08:47.884851: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.11.0
+2022-07-07 12:08:47.884901: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.11
+2022-07-07 12:08:47.884913: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.11
+2022-07-07 12:08:47.884928: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2022-07-07 12:08:47.884941: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2022-07-07 12:08:47.884952: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2022-07-07 12:08:47.884971: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.11
+2022-07-07 12:08:47.884984: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.8
+2022-07-07 12:08:47.887950: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2022-07-07 12:08:47.890533: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.11.0
+2022-07-07 12:08:49.791202: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1261] Device interconnect StreamExecutor with strength 1 edge matrix:
+2022-07-07 12:08:49.791294: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1267]      0 
+2022-07-07 12:08:49.791326: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1280] 0:   N 
+2022-07-07 12:08:49.799004: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1406] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 22291 MB memory) -> physical GPU (device: 0, name: GeForce RTX 3090, pci bus id: 0000:73:00.0, compute capability: 8.6)
+2022-07-07 12:08:49.805798: W tensorflow/core/framework/cpu_allocator_impl.cc:80] Allocation of 5842728000 exceeds 10% of free system memory.
+2022-07-07 12:08:55.718988: W tensorflow/core/framework/cpu_allocator_impl.cc:80] Allocation of 1460736000 exceeds 10% of free system memory.
+Tensorflow 2.4.1
+Create New model folder
+[PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU'), PhysicalDevice(name='/physical_device:GPU:1', device_type='GPU')]
+# GPU selected!
+Total data number is 101437
+Data processing took 0:00:55
+Model: "model"
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_1 (InputLayer)            [(None, 1, 6000, 3)] 0                                            
+__________________________________________________________________________________________________
+conv2d (Conv2D)                 (None, 1, 6000, 64)  832         input_1[0][0]                    
+__________________________________________________________________________________________________
+conv2d_1 (Conv2D)               (None, 1, 6000, 64)  16448       conv2d[0][0]                     
+__________________________________________________________________________________________________
+max_pooling2d (MaxPooling2D)    (None, 1, 3000, 64)  0           conv2d_1[0][0]                   
+__________________________________________________________________________________________________
+conv2d_2 (Conv2D)               (None, 1, 3000, 128) 32896       max_pooling2d[0][0]              
+__________________________________________________________________________________________________
+conv2d_3 (Conv2D)               (None, 1, 3000, 128) 65664       conv2d_2[0][0]                   
+__________________________________________________________________________________________________
+max_pooling2d_1 (MaxPooling2D)  (None, 1, 1500, 128) 0           conv2d_3[0][0]                   
+__________________________________________________________________________________________________
+conv2d_4 (Conv2D)               (None, 1, 1500, 256) 131328      max_pooling2d_1[0][0]            
+__________________________________________________________________________________________________
+conv2d_5 (Conv2D)               (None, 1, 1500, 256) 262400      conv2d_4[0][0]                   
+__________________________________________________________________________________________________
+max_pooling2d_2 (MaxPooling2D)  (None, 1, 750, 256)  0           conv2d_5[0][0]                   
+__________________________________________________________________________________________________
+conv2d_6 (Conv2D)               (None, 1, 750, 512)  524800      max_pooling2d_2[0][0]            
+__________________________________________________________________________________________________
+conv2d_7 (Conv2D)               (None, 1, 750, 512)  1049088     conv2d_6[0][0]                   
+__________________________________________________________________________________________________
+dropout (Dropout)               (None, 1, 750, 512)  0           conv2d_7[0][0]                   
+__________________________________________________________________________________________________
+max_pooling2d_3 (MaxPooling2D)  (None, 1, 375, 512)  0           dropout[0][0]                    
+__________________________________________________________________________________________________
+conv2d_8 (Conv2D)               (None, 1, 375, 1024) 2098176     max_pooling2d_3[0][0]            
+__________________________________________________________________________________________________
+conv2d_9 (Conv2D)               (None, 1, 375, 1024) 4195328     conv2d_8[0][0]                   
+__________________________________________________________________________________________________
+dropout_1 (Dropout)             (None, 1, 375, 1024) 0           conv2d_9[0][0]                   
+__________________________________________________________________________________________________
+up_sampling2d (UpSampling2D)    (None, 1, 750, 1024) 0           dropout_1[0][0]                  
+__________________________________________________________________________________________________
+conv2d_10 (Conv2D)              (None, 1, 750, 512)  2097664     up_sampling2d[0][0]              
+__________________________________________________________________________________________________
+concatenate (Concatenate)       (None, 1, 750, 1024) 0           dropout[0][0]                    
+                                                                 conv2d_10[0][0]                  
+__________________________________________________________________________________________________
+conv2d_11 (Conv2D)              (None, 1, 750, 512)  2097664     concatenate[0][0]                
+__________________________________________________________________________________________________
+conv2d_12 (Conv2D)              (None, 1, 750, 512)  1049088     conv2d_11[0][0]                  
+__________________________________________________________________________________________________
+up_sampling2d_1 (UpSampling2D)  (None, 1, 1500, 512) 0           conv2d_12[0][0]                  
+__________________________________________________________________________________________________
+conv2d_13 (Conv2D)              (None, 1, 1500, 256) 524544      up_sampling2d_1[0][0]            
+__________________________________________________________________________________________________
+concatenate_1 (Concatenate)     (None, 1, 1500, 512) 0           conv2d_5[0][0]                   
+                                                                 conv2d_13[0][0]                  
+__________________________________________________________________________________________________
+conv2d_14 (Conv2D)              (None, 1, 1500, 256) 524544      concatenate_1[0][0]              
+__________________________________________________________________________________________________
+conv2d_15 (Conv2D)              (None, 1, 1500, 256) 262400      conv2d_14[0][0]                  
+__________________________________________________________________________________________________
+up_sampling2d_2 (UpSampling2D)  (None, 1, 3000, 256) 0           conv2d_15[0][0]                  
+__________________________________________________________________________________________________
+conv2d_16 (Conv2D)              (None, 1, 3000, 128) 131200      up_sampling2d_2[0][0]            
+__________________________________________________________________________________________________
+concatenate_2 (Concatenate)     (None, 1, 3000, 256) 0           conv2d_3[0][0]                   
+                                                                 conv2d_16[0][0]                  
+__________________________________________________________________________________________________
+conv2d_17 (Conv2D)              (None, 1, 3000, 128) 131200      concatenate_2[0][0]              
+__________________________________________________________________________________________________
+conv2d_18 (Conv2D)              (None, 1, 3000, 128) 65664       conv2d_17[0][0]                  
+__________________________________________________________________________________________________
+up_sampling2d_3 (UpSampling2D)  (None, 1, 6000, 128) 0           conv2d_18[0][0]                  
+__________________________________________________________________________________________________
+conv2d_19 (Conv2D)              (None, 1, 6000, 64)  32832       up_sampling2d_3[0][0]            
+__________________________________________________________________________________________________
+concatenate_3 (Concatenate)     (None, 1, 6000, 128) 0           conv2d_1[0][0]                   
+                                                                 conv2d_19[0][0]                  
+__________________________________________________________________________________________________
+conv2d_20 (Conv2D)              (None, 1, 6000, 64)  32832       concatenate_3[0][0]              
+__________________________________________________________________________________________________
+conv2d_21 (Conv2D)              (None, 1, 6000, 64)  16448       conv2d_20[0][0]                  
+__________________________________________________________________________________________________2022-07-07 12:09:00.358428: W tensorflow/core/framework/cpu_allocator_impl.cc:80] Allocation of 5842728000 exceeds 10% of free system memory.
+2022-07-07 12:09:10.222410: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:116] None of the MLIR optimization passes are enabled (registered 2)
+2022-07-07 12:09:10.251770: I tensorflow/core/platform/profile_utils/cpu_utils.cc:112] CPU Frequency: 2400000000 Hz
+2022-07-07 12:09:10.600692: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.11
+2022-07-07 12:09:11.648869: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.11
+2022-07-07 12:09:11.675596: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.8
+2022-07-07 12:09:19.190997: I tensorflow/stream_executor/cuda/cuda_blas.cc:1838] TensorFloat-32 will be used for the matrix multiplication. This will only be logged once.
+2022-07-07 12:24:19.701816: W tensorflow/core/framework/cpu_allocator_impl.cc:80] Allocation of 1460736000 exceeds 10% of free system memory.
+2022-07-07 12:25:05.642033: W tensorflow/core/framework/cpu_allocator_impl.cc:80] Allocation of 5842728000 exceeds 10% of free system memory.
+
+
+conv2d_22 (Conv2D)              (None, 1, 6000, 2)   514         conv2d_21[0][0]                  
+__________________________________________________________________________________________________
+flatten (Flatten)               (None, 12000)        0           conv2d_22[0][0]                  
+__________________________________________________________________________________________________
+dense (Dense)                   (None, 1024)         12289024    flatten[0][0]                    
+__________________________________________________________________________________________________
+dropout_2 (Dropout)             (None, 1024)         0           dense[0][0]                      
+__________________________________________________________________________________________________
+dense_1 (Dense)                 (None, 101)          103525      dropout_2[0][0]                  
+==================================================================================================
+Total params: 27,736,103
+Trainable params: 27,736,103
+Non-trainable params: 0
+__________________________________________________________________________________________________
+model info save COMPLETE!
+Learning started. It takes sometime.
+Random Selected Index : [75428, 59258, 67851, 7895]
+Random Selected Index : [12961, 10685, 16504, 6911]
+Epoch: 1 loss = 0.71786618 train MAE = 4.4452km test MAE = 3.7733km
+Epoch: 2 loss = 0.67410815 train MAE = 3.4428km test MAE = 3.6244km
+Epoch: 3 loss = 0.65149510 train MAE = 3.0290km test MAE = 3.1474km
+Epoch: 4 loss = 0.63253200 train MAE = 2.5841km test MAE = 3.1518km
+Epoch: 5 loss = 0.61370051 train MAE = 2.1060km test MAE = 3.1597km
+Epoch: 6 loss = 0.59219104 train MAE = 1.6661km test MAE = 3.0991km
+Epoch: 7 loss = 0.56630945 train MAE = 1.3041km test MAE = 3.1636km
+Epoch: 8 loss = 0.53132409 train MAE = 1.0027km test MAE = 3.2538km
+Epoch: 9 loss = 0.48789197 train MAE = 0.7597km test MAE = 3.3445km
+Epoch: 10 loss = 0.43711141 train MAE = 0.6277km test MAE = 3.6338km
+Epoch: 11 loss = 0.38675457 train MAE = 0.5357km test MAE = 3.8566km
+Epoch: 12 loss = 0.34396896 train MAE = 0.5566km test MAE = 3.8379km
+Epoch: 13 loss = 0.31017169 train MAE = 0.5797km test MAE = 4.4337km
+Learning Finished! Learning time: 3:24:19

@@ -1,0 +1,102 @@
+nohup: ignoring input
+2022-07-06 16:02:42.195967: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.11.0
+2022-07-06 16:02:44.466125: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2022-07-06 16:02:44.467157: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcuda.so.1
+2022-07-06 16:02:44.596503: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:73:00.0 name: GeForce RTX 3090 computeCapability: 8.6
+coreClock: 1.695GHz coreCount: 82 deviceMemorySize: 23.70GiB deviceMemoryBandwidth: 871.81GiB/s
+2022-07-06 16:02:44.599016: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 1 with properties: 
+pciBusID: 0000:d5:00.0 name: GeForce RTX 3090 computeCapability: 8.6
+coreClock: 1.695GHz coreCount: 82 deviceMemorySize: 23.70GiB deviceMemoryBandwidth: 871.81GiB/s
+2022-07-06 16:02:44.599087: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.11.0
+2022-07-06 16:02:44.606649: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.11
+2022-07-06 16:02:44.606742: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.11
+2022-07-06 16:02:44.609139: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2022-07-06 16:02:44.609602: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2022-07-06 16:02:44.615631: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2022-07-06 16:02:44.616568: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.11
+2022-07-06 16:02:44.616752: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.8
+2022-07-06 16:02:44.621143: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0, 1
+  0%|          | 0/101437 [00:00<?, ?it/s] 83%|████████▎ | 84573/101437 [00:00<00:00, 845698.55it/s]100%|██████████| 101437/101437 [00:00<00:00, 866771.96it/s]2022-07-06 16:03:20.996332: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 AVX512F FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2022-07-06 16:03:20.999488: I tensorflow/compiler/jit/xla_gpu_device.cc:99] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2022-07-06 16:03:21.002308: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:73:00.0 name: GeForce RTX 3090 computeCapability: 8.6
+coreClock: 1.695GHz coreCount: 82 deviceMemorySize: 23.70GiB deviceMemoryBandwidth: 871.81GiB/s
+2022-07-06 16:03:21.002343: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.11.0
+2022-07-06 16:03:21.002396: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.11
+2022-07-06 16:03:21.002409: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.11
+2022-07-06 16:03:21.002423: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2022-07-06 16:03:21.002437: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2022-07-06 16:03:21.002451: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2022-07-06 16:03:21.002470: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.11
+2022-07-06 16:03:21.002483: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.8
+2022-07-06 16:03:21.006642: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2022-07-06 16:03:21.006678: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.11.0
+2022-07-06 16:03:21.944830: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1261] Device interconnect StreamExecutor with strength 1 edge matrix:
+2022-07-06 16:03:21.944881: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1267]      0 
+2022-07-06 16:03:21.944892: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1280] 0:   N 
+2022-07-06 16:03:21.947902: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1406] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 22291 MB memory) -> physical GPU (device: 0, name: GeForce RTX 3090, pci bus id: 0000:73:00.0, compute capability: 8.6)
+2022-07-06 16:03:21.952179: W tensorflow/core/framework/cpu_allocator_impl.cc:80] Allocation of 5842728000 exceeds 10% of free system memory.
+2022-07-06 16:03:28.823500: W tensorflow/core/framework/cpu_allocator_impl.cc:80] Allocation of 1460736000 exceeds 10% of free system memory.
+2022-07-06 16:03:33.020088: W tensorflow/core/framework/cpu_allocator_impl.cc:80] Allocation of 5842728000 exceeds 10% of free system memory.
+2022-07-06 16:03:43.466295: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:116] None of the MLIR optimization passes are enabled (registered 2)
+2022-07-06 16:03:43.496534: I tensorflow/core/platform/profile_utils/cpu_utils.cc:112] CPU Frequency: 2400000000 Hz
+2022-07-06 16:03:43.811740: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.11
+2022-07-06 16:03:45.919009: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.11
+2022-07-06 16:03:45.934649: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.8
+2022-07-06 16:03:55.156161: I tensorflow/stream_executor/cuda/cuda_blas.cc:1838] TensorFloat-32 will be used for the matrix multiplication. This will only be logged once.
+2022-07-06 16:07:09.075887: W tensorflow/core/framework/cpu_allocator_impl.cc:80] Allocation of 1460736000 exceeds 10% of free system memory.
+2022-07-06 16:07:26.097105: W tensorflow/core/framework/cpu_allocator_impl.cc:80] Allocation of 5842728000 exceeds 10% of free system memory.
+
+Tensorflow 2.4.1
+Create New model folder
+[PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU'), PhysicalDevice(name='/physical_device:GPU:1', device_type='GPU')]
+# GPU selected!
+Total data number is 101437
+Data processing took 0:00:45
+Model: "sequential"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+conv2d (Conv2D)              (None, 1, 6000, 32)       416       
+_________________________________________________________________
+max_pooling2d (MaxPooling2D) (None, 1, 3000, 32)       0         
+_________________________________________________________________
+conv2d_1 (Conv2D)            (None, 1, 3000, 64)       8256      
+_________________________________________________________________
+max_pooling2d_1 (MaxPooling2 (None, 1, 1500, 64)       0         
+_________________________________________________________________
+conv2d_2 (Conv2D)            (None, 1, 1500, 128)      32896     
+_________________________________________________________________
+max_pooling2d_2 (MaxPooling2 (None, 1, 750, 128)       0         
+_________________________________________________________________
+conv2d_3 (Conv2D)            (None, 1, 750, 256)       131328    
+_________________________________________________________________
+max_pooling2d_3 (MaxPooling2 (None, 1, 375, 256)       0         
+_________________________________________________________________
+flatten (Flatten)            (None, 96000)             0         
+_________________________________________________________________
+dense (Dense)                (None, 1024)              98305024  
+_________________________________________________________________
+dropout (Dropout)            (None, 1024)              0         
+_________________________________________________________________
+dense_1 (Dense)              (None, 101)               103525    
+=================================================================
+Total params: 98,581,445
+Trainable params: 98,581,445
+Non-trainable params: 0
+_________________________________________________________________
+model info save COMPLETE!
+Learning started. It takes sometime.
+Random Selected Index : [62615, 73791, 62117, 59481]
+Random Selected Index : [16053, 5007, 3969, 18735]
+Epoch: 1 loss = 0.71666616 train MAE = 4.5278km test MAE = 3.9788km
+Epoch: 2 loss = 0.64345664 train MAE = 2.6764km test MAE = 3.4781km
+Epoch: 3 loss = 0.54808766 train MAE = 0.9375km test MAE = 3.3001km
+Epoch: 4 loss = 0.43700895 train MAE = 0.2701km test MAE = 3.3253km
+Epoch: 5 loss = 0.33071011 train MAE = 0.0795km test MAE = 3.4303km
+Epoch: 6 loss = 0.25303692 train MAE = 0.0328km test MAE = 3.5140km
+Epoch: 7 loss = 0.20369324 train MAE = 0.0203km test MAE = 3.7615km
+Epoch: 8 loss = 0.17035560 train MAE = 0.0222km test MAE = 3.8393km
+Learning Finished! Learning time: 0:28:33

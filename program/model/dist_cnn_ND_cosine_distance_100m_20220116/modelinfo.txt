@@ -1,0 +1,57 @@
+Model: "sequential"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+conv2d (Conv2D)              (None, 1, 6000, 32)       416       
+_________________________________________________________________
+max_pooling2d (MaxPooling2D) (None, 1, 3000, 32)       0         
+_________________________________________________________________
+conv2d_1 (Conv2D)            (None, 1, 3000, 64)       8256      
+_________________________________________________________________
+max_pooling2d_1 (MaxPooling2 (None, 1, 1500, 64)       0         
+_________________________________________________________________
+conv2d_2 (Conv2D)            (None, 1, 1500, 128)      32896     
+_________________________________________________________________
+max_pooling2d_2 (MaxPooling2 (None, 1, 750, 128)       0         
+_________________________________________________________________
+conv2d_3 (Conv2D)            (None, 1, 750, 256)       131328    
+_________________________________________________________________
+max_pooling2d_3 (MaxPooling2 (None, 1, 375, 256)       0         
+_________________________________________________________________
+flatten (Flatten)            (None, 96000)             0         
+_________________________________________________________________
+dense (Dense)                (None, 1024)              98305024  
+_________________________________________________________________
+dropout (Dropout)            (None, 1024)              0         
+_________________________________________________________________
+dense_1 (Dense)              (None, 1001)              1026025   
+=================================================================
+Total params: 99,503,945
+Trainable params: 99,503,945
+Non-trainable params: 0
+_________________________________________________________________
+model info save COMPLETE!
+Total data number is 101437, Data processing took 0:11:24.
+learning rate = 0.0001 epoch = 20
+Learning started. It takes sometime.
+Epoch: 1 loss = 0.84838617 train accuracy = 0.3555 test accuracy = 0.3860 train MAE = 5.2281km test MAE = 4.4181km
+Epoch: 2 loss = 0.80671293 train accuracy = 0.4543 test accuracy = 0.4389 train MAE = 3.5964km test MAE = 3.9813km
+Epoch: 3 loss = 0.76797426 train accuracy = 0.5832 test accuracy = 0.4710 train MAE = 2.2378km test MAE = 3.8129km
+Epoch: 4 loss = 0.71709025 train accuracy = 0.7103 test accuracy = 0.4919 train MAE = 1.3143km test MAE = 3.7351km
+Epoch: 5 loss = 0.64958620 train accuracy = 0.8217 test accuracy = 0.4931 train MAE = 0.7572km test MAE = 3.7811km
+Epoch: 6 loss = 0.57639003 train accuracy = 0.8998 test accuracy = 0.4899 train MAE = 0.4548km test MAE = 4.0150km
+Epoch: 7 loss = 0.51462644 train accuracy = 0.9384 test accuracy = 0.4682 train MAE = 0.3296km test MAE = 4.6925km
+Epoch: 8 loss = 0.46902657 train accuracy = 0.9539 test accuracy = 0.4649 train MAE = 0.3123km test MAE = 4.9555km
+Epoch: 9 loss = 0.43833825 train accuracy = 0.9594 test accuracy = 0.4466 train MAE = 0.3460km test MAE = 5.6140km
+Epoch: 10 loss = 0.41592193 train accuracy = 0.9594 test accuracy = 0.4479 train MAE = 0.4010km test MAE = 5.5011km
+Epoch: 11 loss = 0.40099838 train accuracy = 0.9569 test accuracy = 0.4450 train MAE = 0.4975km test MAE = 6.2921km
+Epoch: 12 loss = 0.38946763 train accuracy = 0.9534 test accuracy = 0.4107 train MAE = 0.5608km test MAE = 8.1916km
+Epoch: 13 loss = 0.38115242 train accuracy = 0.9497 test accuracy = 0.4242 train MAE = 0.6075km test MAE = 6.2371km
+Epoch: 14 loss = 0.37415892 train accuracy = 0.9462 test accuracy = 0.4084 train MAE = 0.6855km test MAE = 6.5751km
+Epoch: 15 loss = 0.36952281 train accuracy = 0.9435 test accuracy = 0.4282 train MAE = 0.7027km test MAE = 5.9567km
+Epoch: 16 loss = 0.36714467 train accuracy = 0.9411 test accuracy = 0.3484 train MAE = 0.7377km test MAE = 10.9534km
+Epoch: 17 loss = 0.36698601 train accuracy = 0.9391 test accuracy = 0.3992 train MAE = 0.7490km test MAE = 7.8980km
+Epoch: 18 loss = 0.36464331 train accuracy = 0.9366 test accuracy = 0.3973 train MAE = 0.7740km test MAE = 7.7532km
+Epoch: 19 loss = 0.36594585 train accuracy = 0.9346 test accuracy = 0.4031 train MAE = 0.7911km test MAE = 7.1850km
+Epoch: 20 loss = 0.36681506 train accuracy = 0.9332 test accuracy = 0.3810 train MAE = 0.8032km test MAE = 9.2297km
+Learning Finished! It took 1:11:35.

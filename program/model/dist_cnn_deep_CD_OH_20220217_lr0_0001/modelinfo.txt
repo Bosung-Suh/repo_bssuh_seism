@@ -1,0 +1,65 @@
+Model: "sequential"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+conv2d (Conv2D)              (None, 1, 6000, 32)       416       
+_________________________________________________________________
+max_pooling2d (MaxPooling2D) (None, 1, 3000, 32)       0         
+_________________________________________________________________
+conv2d_1 (Conv2D)            (None, 1, 3000, 64)       8256      
+_________________________________________________________________
+max_pooling2d_1 (MaxPooling2 (None, 1, 1500, 64)       0         
+_________________________________________________________________
+conv2d_2 (Conv2D)            (None, 1, 1500, 128)      32896     
+_________________________________________________________________
+max_pooling2d_2 (MaxPooling2 (None, 1, 750, 128)       0         
+_________________________________________________________________
+conv2d_3 (Conv2D)            (None, 1, 750, 256)       131328    
+_________________________________________________________________
+max_pooling2d_3 (MaxPooling2 (None, 1, 375, 256)       0         
+_________________________________________________________________
+conv2d_4 (Conv2D)            (None, 1, 375, 512)       524800    
+_________________________________________________________________
+max_pooling2d_4 (MaxPooling2 (None, 1, 188, 512)       0         
+_________________________________________________________________
+conv2d_5 (Conv2D)            (None, 1, 188, 1024)      2098176   
+_________________________________________________________________
+max_pooling2d_5 (MaxPooling2 (None, 1, 94, 1024)       0         
+_________________________________________________________________
+flatten (Flatten)            (None, 96256)             0         
+_________________________________________________________________
+dense (Dense)                (None, 1024)              98567168  
+_________________________________________________________________
+dropout (Dropout)            (None, 1024)              0         
+_________________________________________________________________
+dense_1 (Dense)              (None, 101)               103525    
+=================================================================
+Total params: 101,466,565
+Trainable params: 101,466,565
+Non-trainable params: 0
+_________________________________________________________________
+model info save COMPLETE!
+Total data number is 101437, Data processing took 0:00:44.
+learning rate = 0.0001 epoch = 20
+Learning started. It takes sometime.
+Epoch: 1 loss = 0.71458137 train MAE = 4.2025km test MAE = 3.6082km
+Epoch: 2 loss = 0.64911050 train MAE = 2.8813km test MAE = 3.1646km
+Epoch: 3 loss = 0.59002423 train MAE = 1.7513km test MAE = 2.8014km
+Epoch: 4 loss = 0.51920807 train MAE = 0.8314km test MAE = 2.6732km
+Epoch: 5 loss = 0.43641901 train MAE = 0.3585km test MAE = 2.6925km
+Epoch: 6 loss = 0.34972498 train MAE = 0.1731km test MAE = 2.8127km
+Epoch: 7 loss = 0.27860206 train MAE = 0.1328km test MAE = 3.0522km
+Epoch: 8 loss = 0.22769907 train MAE = 0.1307km test MAE = 3.1962km
+Epoch: 9 loss = 0.19324359 train MAE = 0.1491km test MAE = 3.3243km
+Epoch: 10 loss = 0.17036147 train MAE = 0.1856km test MAE = 3.8250km
+Epoch: 11 loss = 0.15596427 train MAE = 0.1963km test MAE = 5.2336km
+Epoch: 12 loss = 0.15311036 train MAE = 0.2392km test MAE = 4.6175km
+Epoch: 13 loss = 0.15546401 train MAE = 0.2599km test MAE = 5.0517km
+Epoch: 14 loss = 0.16150047 train MAE = 0.2776km test MAE = 5.7314km
+Epoch: 15 loss = 0.16837461 train MAE = 0.3103km test MAE = 6.4322km
+Epoch: 16 loss = 0.17645553 train MAE = 0.3510km test MAE = 7.2169km
+Epoch: 17 loss = 0.18324445 train MAE = 0.3813km test MAE = 6.8226km
+Epoch: 18 loss = 0.18685956 train MAE = 0.4394km test MAE = 6.2627km
+Epoch: 19 loss = 0.19119060 train MAE = 0.4609km test MAE = 7.1528km
+Epoch: 20 loss = 0.19260001 train MAE = 0.4976km test MAE = 6.8724km
+Learning Finished! It took 1:26:59.
