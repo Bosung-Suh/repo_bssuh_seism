@@ -78,9 +78,9 @@ currentdir = os.getcwd()
 checkpt_dir_name = 'checkpoints'
 modelname = 'dist_Unet_CD_ND_20220220_lr0_0001'
 
-modeltopdir = r'/home/bssuh/program/model'
-resultmodeldir = os.path.join(modeltopdir, modelname)    #/home/bssuh/program/model/dist_cnn_seq
-checkpointdir = os.path.join(resultmodeldir, checkpt_dir_name)    #/home/bssuh/program/model/dist_cnn_seq/checkpoints
+modeltopdir = r'/home/bssuh/repo_bssuh_seism/program/model'
+resultmodeldir = os.path.join(modeltopdir, modelname)    #/home/bssuh/repo_bssuh_seism/program/model/dist_cnn_seq
+checkpointdir = os.path.join(resultmodeldir, checkpt_dir_name)    #/home/bssuh/repo_bssuh_seism/program/model/dist_cnn_seq/checkpoints
 
 #0 model folder reset
 if os.path.exists(resultmodeldir):
@@ -135,11 +135,11 @@ def load_data(npy):
 
 # pickle module(파이썬 객체 자체를 파일로 저장. 불러오기만 하면 되므로 속도 빨라짐)
 ## Save pickle
-""" with open(r'/home/bssuh/program/eqdata.pkl','wb') as fh1:    #pickle file directory
+""" with open(r'/home/bssuh/repo_bssuh_seism/program/eqdata.pkl','wb') as fh1:    #pickle file directory
     pickle.dump(dataload,fh1) #여기 아래에 quit()으로 일단 pkl 파일 작성
 quit() """
 ## Load pickle
-with open(r'/home/bssuh/program/eqdata.pkl','rb') as fh1:    #pickle file directory
+with open(r'/home/bssuh/repo_bssuh_seism/program/eqdata.pkl','rb') as fh1:    #pickle file directory
     dataload=pickle.load(fh1)
 
 # 2.datasets
@@ -189,7 +189,7 @@ plt.ylabel('probabiliry')
 plt.legend(['label1','label2'])
 
 plt.show()
-plt.savefig(r'/home/bssuh/program/Test/plot/one_hot.png',facecolor='#eeeeee') """
+plt.savefig(r'/home/bssuh/repo_bssuh_seism/program/Test/plot/one_hot.png',facecolor='#eeeeee') """
 
 # 2. split train, test, validation dataset
 traindata, testdata, trainlabel, testlabel = train_test_split(npys, labels, test_size=0.2, shuffle=True, random_state=42)
@@ -267,7 +267,7 @@ def unet(pretrained_weights = None,input_size = (1,6000,3)):    #UNet은 Functio
 # 3.print and save model summary
 model = unet()
 model.summary()    #model에 대한 정보 표출
-modelinfodir = os.path.join(resultmodeldir, "modelinfo.txt")    #/home/bssuh/program/model/dist_cnn_seq/modelinfo.txt
+modelinfodir = os.path.join(resultmodeldir, "modelinfo.txt")    #/home/bssuh/repo_bssuh_seism/program/model/dist_cnn_seq/modelinfo.txt
 with open(modelinfodir, 'w') as f:
     model.summary(print_fn=lambda x: f.write(x + nextline))
 print("model info save COMPLETE!")    
@@ -383,7 +383,7 @@ plt.legend(loc='best')
 
 plt.tight_layout()
 plt.show()
-modelplotdir = os.path.join(resultmodeldir, "modelplot.png")    #/home/bssuh/program/model/dist_cnn_seq/modelplot.png
+modelplotdir = os.path.join(resultmodeldir, "modelplot.png")    #/home/bssuh/repo_bssuh_seism/program/model/dist_cnn_seq/modelplot.png
 plt.savefig(modelplotdir,facecolor='#eeeeee')
 
 f.write(f"Learning Finished! It took {modeltime}.")

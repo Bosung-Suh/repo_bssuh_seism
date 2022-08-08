@@ -20,7 +20,7 @@ normalnum = 0
 iteration = 0
 nofilenum = 0
 #0 Error Test Directory
-errortestdir=r'/DATA/bssuh/program/Test/error.txt'
+errortestdir=r'/DATA/bssuh/repo_bssuh_seism/program/Test/error.txt'
 open(errortestdir,'w').close()
 error = open(errortestdir,'a')    #error.write("RESULT"+'\n')
 

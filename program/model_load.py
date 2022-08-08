@@ -47,10 +47,10 @@ modelepochname = "Model_epoch"+str(modelepoch)+".h5"
 data_dir=r'/home/bssuh/jwhan/npy_data_test'
 
 # 1.checkpoint directory
-modeltopdir = r'/home/bssuh/program/model'
+modeltopdir = r'/home/bssuh/repo_bssuh_seism/program/model'
 resultmodeldir = os.path.join(modeltopdir, modelname)
 checkpointdir = os.path.join(resultmodeldir, "checkpoints")
-modelfiledir = os.path.join(checkpointdir, modelepochname)    #/home/bssuh/program/model/dist_cnn_CD_OH_20220316_modelsave/checkpoints/Model_epoch1.h5
+modelfiledir = os.path.join(checkpointdir, modelepochname)    #/home/bssuh/repo_bssuh_seism/program/model/dist_cnn_CD_OH_20220316_modelsave/checkpoints/Model_epoch1.h5
 modelcalcdir = os.path.join(resultmodeldir, "calculation")
 os.makedirs(modelcalcdir, exist_ok=True)
 

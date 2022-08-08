@@ -72,9 +72,9 @@ currentdir = os.getcwd()
 checkpt_dir_name = 'checkpoints'
 modelname = 'dist_cnn_seq_norm'
 
-modeltopdir = r'/home/bssuh/program/model'
-resultmodeldir = os.path.join(modeltopdir, modelname)    #/home/bssuh/program/model/dist_cnn_seq
-checkpointdir = os.path.join(resultmodeldir, checkpt_dir_name)    #/home/bssuh/program/model/dist_cnn_seq/checkpoints
+modeltopdir = r'/home/bssuh/repo_bssuh_seism/program/model'
+resultmodeldir = os.path.join(modeltopdir, modelname)    #/home/bssuh/repo_bssuh_seism/program/model/dist_cnn_seq
+checkpointdir = os.path.join(resultmodeldir, checkpt_dir_name)    #/home/bssuh/repo_bssuh_seism/program/model/dist_cnn_seq/checkpoints
 
 os.makedirs(resultmodeldir, exist_ok=True)
 os.makedirs(checkpointdir, exist_ok=True)   
@@ -106,11 +106,11 @@ def load_data(npy):
 
 # pickle module(파이썬 객체 자체를 파일로 저장. 불러오기만 하면 되므로 속도 빨라짐)
 ## Save pickle
-""" with open(r'/home/bssuh/program/eqdata.pkl','wb') as fh1:    #pickle file directory
+""" with open(r'/home/bssuh/repo_bssuh_seism/program/eqdata.pkl','wb') as fh1:    #pickle file directory
     pickle.dump(dataload,fh1) #여기 아래에 quit()으로 일단 pkl 파일 작성
 quit() """
 ## Load pickle
-with open(r'/home/bssuh/program/eqdata.pkl','rb') as fh1:    #pickle file directory
+with open(r'/home/bssuh/repo_bssuh_seism/program/eqdata.pkl','rb') as fh1:    #pickle file directory
     dataload=pickle.load(fh1)
 
 # 2.datasets
@@ -200,7 +200,7 @@ def create_model():    #함수 형태(sequential)로 네트워크 구성
 # 3.print and save model summary
 model = create_model()
 model.summary()    #model에 대한 정보 표출
-modelinfodir = os.path.join(resultmodeldir, "modelinfo.txt")    #/home/bssuh/program/model/dist_cnn_seq/modelinfo.txt
+modelinfodir = os.path.join(resultmodeldir, "modelinfo.txt")    #/home/bssuh/repo_bssuh_seism/program/model/dist_cnn_seq/modelinfo.txt
 with open(modelinfodir, 'w') as f:
     model.summary(print_fn=lambda x: f.write(x + nextline))
 print("model info save COMPLETE!") 
