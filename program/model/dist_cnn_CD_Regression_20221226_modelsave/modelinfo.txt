@@ -1,0 +1,56 @@
+Model: "sequential"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ conv2d (Conv2D)             (None, 1, 6000, 32)       416       
+                                                                 
+ max_pooling2d (MaxPooling2D  (None, 1, 3000, 32)      0         
+ )                                                               
+                                                                 
+ conv2d_1 (Conv2D)           (None, 1, 3000, 64)       8256      
+                                                                 
+ max_pooling2d_1 (MaxPooling  (None, 1, 1500, 64)      0         
+ 2D)                                                             
+                                                                 
+ conv2d_2 (Conv2D)           (None, 1, 1500, 128)      32896     
+                                                                 
+ max_pooling2d_2 (MaxPooling  (None, 1, 750, 128)      0         
+ 2D)                                                             
+                                                                 
+ conv2d_3 (Conv2D)           (None, 1, 750, 256)       131328    
+                                                                 
+ max_pooling2d_3 (MaxPooling  (None, 1, 375, 256)      0         
+ 2D)                                                             
+                                                                 
+ flatten (Flatten)           (None, 96000)             0         
+                                                                 
+ dense (Dense)               (None, 1024)              98305024  
+                                                                 
+ dropout (Dropout)           (None, 1024)              0         
+                                                                 
+ dense_1 (Dense)             (None, 1)                 1025      
+                                                                 
+=================================================================
+Total params: 98,478,945
+Trainable params: 98,478,945
+Non-trainable params: 0
+_________________________________________________________________
+model info save COMPLETE!
+Total data number is 101437, Data processing took 0:00:45.
+8115 for training, 1015 for validation, 1015 for test.
+learning rate = 0.0001 epoch = 4
+Learning started. It takes sometime.
+4 randomly selected traindata index : [67650, 71714, 42049, 57301]
+4 randomly selected valdata index : [1401, 5539, 9690, 703]
+4 randomly selected testdata index : [146, 679, 8447, 2802]
+Epoch 1/4
+2022-12-27 16:16:59.559400: I tensorflow/stream_executor/cuda/cuda_dnn.cc:384] Loaded cuDNN version 8401
+2022-12-27 16:17:04.436897: I tensorflow/stream_executor/cuda/cuda_blas.cc:1614] TensorFloat-32 will be used for the matrix multiplication. This will only be logged once.
+8115/8115 - 103s - loss: 132.2099 - mae: 7.7128 - mse: 132.2099 - val_loss: 90.9107 - val_mae: 5.9707 - val_mse: 90.9107 - 103s/epoch - 13ms/step
+Epoch 2/4
+8115/8115 - 91s - loss: 84.2844 - mae: 5.8348 - mse: 84.2844 - val_loss: 79.3963 - val_mae: 5.5089 - val_mse: 79.3963 - 91s/epoch - 11ms/step
+Epoch 3/4
+8115/8115 - 94s - loss: 72.3781 - mae: 5.3434 - mse: 72.3781 - val_loss: 64.9446 - val_mae: 4.6032 - val_mse: 64.9446 - 94s/epoch - 12ms/step
+Epoch 4/4
+8115/8115 - 92s - loss: 63.4260 - mae: 5.0209 - mse: 63.4260 - val_loss: 64.6888 - val_mae: 4.7737 - val_mse: 64.6888 - 92s/epoch - 11ms/step
+Learning Finished! Learning time: 0:06:24

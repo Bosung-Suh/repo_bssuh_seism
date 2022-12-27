@@ -5,49 +5,46 @@
 대략적인 과정
 1. set hyper parameters(learning rate, training epochs, batch size, etc)
 2. make data pipelining(use tf.data)    #dataset을 로드하고 설정한 batch size 만큼 데이터를 가져와서 network에 전달
-3. build neural network model(use tf.keras.sequential API)
-4. define loss function(cross entropy)    #classification 문제이므로 cross entropy
+3. build neural network model(tf.keras.sequential API or Functional API)
+4. define loss function    #Cross Entropy or Cosine Distance
 5. calculate gradient(use tf.GradientTape)    #weight에 대한 gradient 계산
 6. select optimizer(Adam optimizer)    #계산한 gradient로부터 weight를 업데이트
 7. define metric for model performance(accuracy)    #학습모델의 성능을 판단하는 지표 설정
 8. (optional) make checkpoing for saving    #학습 결과를 임시로 저장(선택)
 9. train and validate neural network model
+10. save model at every epoch    #model이 바뀔 때마다 model 저장
+11. model plot    #model 관련 (Epoch vs. MAE&loss, number of dataset vs. error, label vs error(abserror)) plot
+12. prediction 결과 csv 파일 저장
 """
 #서버 접속 상태로 top 명령어로 CPU 모니터링!!
 # 0.import libraries
 from __future__ import absolute_import, division, print_function
+import pathlib
+import matplotlib.pyplot as plt
+import pandas as pd
+import seaborn as sns
+import tensorflow as tf
+from tensorflow import keras
 
 import datetime
 import glob
 #import multiprocessing
 import math
 import os
-import pathlib
+
 # import fnmatch
 # import parmap
 import pickle
 import random
 import shutil
 import time
-
-import matplotlib.pyplot as plt
 import numpy as np
-import pandas as pd
 import scipy.stats as stats
-import tensorflow as tf
+
 import tqdm  # 연속적인 작업의 진행률을 시각적으로 표현    for i in tqdm.tqdm(list):같은 형식
 from obspy import Stream, Trace, UTCDateTime, read
 from sklearn.model_selection import KFold, train_test_split
-from tensorflow import keras
-from tensorflow.keras import backend as K
-from tensorflow.keras import callbacks
-#For Functional API(NOT Sequential API)
-from tensorflow.keras.layers import (Activation, Add, BatchNormalization,
-                                     Conv2D, Conv2DTranspose, Dense, Dropout,
-                                     Flatten, Input, LeakyReLU, MaxPooling2D,
-                                     ReLU, UpSampling2D, concatenate)
-from tensorflow.keras.models import Model, load_model
-from tensorflow.keras.optimizers import Adam
+
 from tensorflow.keras.utils import plot_model, to_categorical
 
 print(f"Tensorflow {tf.__version__}")  #Tensorflow 2.4.1(20220706)
@@ -69,7 +66,7 @@ data_dir=r'/home/bssuh/jwhan/npy_data_test'    #/home/bssuh/jwhan/npy_data_test
 
 # 1.hyper parameters setting
 learning_rate = 0.0001
-training_epochs = 13
+training_epochs = 4
 batch_size = 10
 
 tf.random.set_seed(957)
@@ -77,13 +74,12 @@ tf.random.set_seed(957)
 # 1.create checkpoint directory
 currentdir = os.getcwd()
 checkpt_dir_name = 'checkpoints'
-modelname = 'dist_Unet_CD_OH_20220707_lr0_0001_modelsave'
-
+modelname = 'dist_cnn_CD_Regression_20221226_modelsave'
 modeltopdir = r'/home/bssuh/repo_bssuh_seism/program/model'
 resultmodeldir = os.path.join(modeltopdir, modelname)    #/home/bssuh/repo_bssuh_seism/program/model/dist_cnn_seq
 checkpointdir = os.path.join(resultmodeldir, checkpt_dir_name)    #/home/bssuh/repo_bssuh_seism/program/model/dist_cnn_seq/checkpoints
 
-#0 model folder reset
+#1 model folder reset
 if os.path.exists(resultmodeldir):
     dirlist = os.listdir(resultmodeldir)
     print('*'*50)
@@ -105,16 +101,14 @@ if os.path.exists(resultmodeldir):
 else:
     print('Create New model folder')
 
-#create model folder, checkpoint folder
+#1 create model folder, checkpoint folder
 os.makedirs(resultmodeldir, exist_ok=True)
 os.makedirs(checkpointdir, exist_ok=True) 
 
 # GPU setting(watch -n 0.1 nvidia-smi 로 GPU monitoring!!)
-#GPU로 돌릴 때는 VSCODE 터미널로 돌리지 말고 WSL 따로 열어서 돌릴 것!!!!!!!!!!
-
-# SSH 연결 끊겨도 돌아가게 할려면 eqt4clone 가상환경, program 폴더에서 아래 명령어로 실행 
-# nohup python3 ___.py > /home/bssuh/repo_bssuh_seism/program/nohup_log/___.txt 2>&1 &   
-
+    #GPU로 돌릴 때는 VSCODE 터미널로 돌리지 말고 WSL 따로 열어서 돌릴 것!!!!!!!!!!
+# SSH 연결 끊겨도 돌아가게 할려면 아래 명령어로 실행 
+    # nohup python3 ___.py > /home/bssuh/repo_bssuh_seism/program/nohup_log/___.txt 2>&1 &   
 gpus = tf.config.experimental.list_physical_devices('GPU')
 print(gpus)
 if gpus:
@@ -164,27 +158,14 @@ npys = np.vstack(dataload)
 npys = npys.astype(np.float32)
 labels = labels.astype(np.float32)
 
-# 2.label to categorical(one hot encoding to 0~100)
-labels=to_categorical(labels,101)
+# 2.data normalization(특성들의 스케일, 범위가 다른 경우)
+# 분석하는 특성이 3성분 데이터만 있으므로 정규화 X
+""" def norm(x):
+  return (x - train_stats['mean']) / train_stats['std']
+normed_train_data = norm(train_dataset)
+normed_test_data = norm(test_dataset)
+labels=to_categorical(labels,101) """
 
-""" # 2-2.label to normal distribution(0~100 step=1)
-def N_distribute(n,step,meanlist,sigma):
-    xlist = list(range(0,n+1,step))    #label 거리 값으로 가능한 값
-    label_final = []    #최종 label(정규분포의 확률밀도함수를 가지는 리스트를 하나의 원소로 가지는 리스트)
-    for i in meanlist:
-        distribution = []    #label list의 원소 하나
-        for x in xlist:
-            y = (1 / np.sqrt(2 * np.pi * sigma**2)) * np.exp(-(x-i)**2 / (2 * sigma**2))
-            distribution.append(y)
-        label_final.append(distribution)
-    return label_final
-
-dist_max = 100    #label(거리) 범위의 최댓값
-dist_step = 1
-distribute_sigma = 1   #만들려는 정규분포의 표준편차
-
-labels = N_distribute(dist_max,dist_step,labels,distribute_sigma)    # labels : numpy.ndarray
-labels = list(np.array(labels,dtype='float32')) """
 """ label1 = labels[1]
 label2 = labels[2] """
 """ plt.plot(label1,'ro-',label2,'bs-') #list1,2를 y값으로
@@ -196,15 +177,15 @@ plt.legend(['label1','label2'])
 plt.show()
 plt.savefig(r'/home/bssuh/repo_bssuh_seism/program/Test/plot/one_hot.png',facecolor='#eeeeee') """
 
-# 2. split train, test, validation dataset
-traindata, testdata, trainlabel, testlabel = train_test_split(npys, labels, test_size=0.2, shuffle=True, random_state=42)
-#traindata, valdata, trainlabel, vallabel = train_test_split(restdata, restlabel, test_size=0.25, shuffle=True, random_state=42)
-# train 81149(0.8), test 20288(0.2)
+# 2. split train, test dataset
+traindata, restdata, trainlabel, restlabel = train_test_split(npys, labels, test_size=0.2, shuffle=True, random_state=42)
+valdata, testdata, vallabel, testlabel = train_test_split(restdata, restlabel, test_size=0.5, shuffle=True, random_state=42)
+# train 81150(0.8), validation data 10144(0.1), test 10144(0.1)
 
 # 2.batch size로 각각의 dataset 분할
 traindataset = tf.data.Dataset.from_tensor_slices((traindata, trainlabel)).shuffle(buffer_size=100000).batch(batch_size)  #학습 데이터는 섞어서(다음 원소가 일정하게 선택되는 고정된 값 buffer_size는 충분히 크게)
 testdataset = tf.data.Dataset.from_tensor_slices((testdata, testlabel)).batch(batch_size)    #data를 batch size만큼 잘라서 전달
-#valdataset = tf.data.Dataset.from_tensor_slices((valdata, vallabel)).batch(batch_size) 
+valdataset = tf.data.Dataset.from_tensor_slices((valdata, vallabel)).batch(batch_size) 
 
 #여기까지가 data processing time measuring
 processend = time.time()
@@ -212,65 +193,35 @@ processsec = processend - processstart
 processtime = str(datetime.timedelta(seconds=processsec)).split(".")[0]
 print(f"Data processing took {processtime}")
 
-# 3.model define    Convolution(Fully Connected layer) - Batch Normalization - Activation - Dropout - Pooling 순서 권장
-#Functional API(Input() 함수에 입력의 크기를 정의, 이전층을 다음층 함수의 입력으로 사용, Model() 함수에 입력과 출력을 정의)
-#input이 1 X 6000 X 3channel 이므로 conv2D, UpSampling2D 필터 크기(kernel_size)를 1 X *로 설정해야 Size가 맞아서 Error가 발생하지 않음)
-def unet(pretrained_weights = None,input_size = (1,6000,3)):    #UNet은 Functional API로 네트워크 구성
-    inputs = Input(input_size)
-    #Contracting Path 1(3x3 convolution&ReLU 2회 + 2x2 max-pooling) Down-sampling 1번마다 채널 수가 2배로 늘어남
-    conv1 = Conv2D(filters=64, kernel_size=(1,4), activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(inputs)
-    conv1 = Conv2D(filters=64, kernel_size=(1,4), activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(conv1)
-    pool1 = MaxPooling2D(padding = 'same')(conv1)
-    #Contracting Path 2
-    conv2 = Conv2D(filters=128, kernel_size=(1,4), activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(pool1)
-    conv2 = Conv2D(filters=128, kernel_size=(1,4), activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(conv2)
-    pool2 = MaxPooling2D(padding = 'same')(conv2)
-    #Contracting Path 3
-    conv3 = Conv2D(filters=256, kernel_size=(1,4), activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(pool2)
-    conv3 = Conv2D(filters=256, kernel_size=(1,4), activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(conv3)
-    pool3 = MaxPooling2D(padding = 'same')(conv3)
-    #Contracting Path 4
-    conv4 = Conv2D(filters=512, kernel_size=(1,4), activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(pool3)
-    conv4 = Conv2D(filters=512, kernel_size=(1,4), activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(conv4)
-    drop4 = Dropout(0.4)(conv4)
-    pool4 = MaxPooling2D(padding = 'same')(drop4)
-    #Bottle Neck(전환 구간: 3X3 convolution&ReLU 2회 + Dropout) 모델 일반화&노이즈에 견고해짐(robust)
-    conv5 = Conv2D(filters=1024, kernel_size=(1,4), activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(pool4)
-    conv5 = Conv2D(filters=1024, kernel_size=(1,4), activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(conv5)
-    drop5 = Dropout(0.4)(conv5)
-    #Expanding Path 1(2x2 UP-convolution&ReLU + 3x3 convolution&ReLU 2회) Up-sampling 1번마다 채널 수가 반으로 감소
-    up6 = Conv2D(filters=512, kernel_size=(1,4), activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(UpSampling2D(size = (1,2))(drop5))
-    merge6 = concatenate([drop4,up6], axis = 3)    #Up-Conv 된 특징맵은 Contracting path의 테두리가 Cropped된 특징맵과 concatenation 됨(Copy&Crop)
-    conv6 = Conv2D(filters=512, kernel_size=(1,4), activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(merge6)
-    conv6 = Conv2D(filters=512, kernel_size=(1,4), activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(conv6)
-    #Expanding Path 2
-    up7 = Conv2D(filters=256, kernel_size=(1,4), activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(UpSampling2D(size = (1,2))(conv6))
-    merge7 = concatenate([conv3,up7], axis = 3)
-    conv7 = Conv2D(filters=256, kernel_size=(1,4), activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(merge7)
-    conv7 = Conv2D(filters=256, kernel_size=(1,4), activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(conv7)
-    #Expanding Path 3
-    up8 = Conv2D(filters=128, kernel_size=(1,4), activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(UpSampling2D(size = (1,2))(conv7))
-    merge8 = concatenate([conv2,up8], axis = 3)
-    conv8 = Conv2D(filters=128, kernel_size=(1,4), activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(merge8)
-    conv8 = Conv2D(filters=128, kernel_size=(1,4), activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(conv8)
-    #Expanding Path 4
-    up9 = Conv2D(filters=64, kernel_size=(1,4), activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(UpSampling2D(size = (1,2))(conv8))
-    merge9 = concatenate([conv1,up9], axis = 3)
-    conv9 = Conv2D(filters=64, kernel_size=(1,4), activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(merge9)
-    conv9 = Conv2D(filters=64, kernel_size=(1,4), activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(conv9)
-    conv9 = Conv2D(filters=2, kernel_size=(1,4), activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(conv9)
+# 3.model define
+def create_model():    #함수 형태(sequential)로 네트워크 구성
+    model = keras.Sequential()    #API 선언
+    #First Conv2d+Maxpool
+    model.add(keras.layers.Conv2D(filters=32, kernel_size=(1,4), activation=tf.nn.relu, padding='SAME', 
+                                  input_shape=(1,6000,3)))    #첫번째 layer에만 input shape 입력(height*width*channel)
+    model.add(keras.layers.MaxPool2D(padding='SAME'))    #size 2*2, stride 2는 default이므로 생략
+    #Second Conv2d+Maxpool
+    model.add(keras.layers.Conv2D(filters=64, kernel_size=(1,4), activation=tf.nn.relu, padding='SAME'))
+    model.add(keras.layers.MaxPool2D(padding='SAME'))
+    #Third Conv2d+Maxpool
+    model.add(keras.layers.Conv2D(filters=128, kernel_size=(1,4), activation=tf.nn.relu, padding='SAME'))
+    model.add(keras.layers.MaxPool2D(padding='SAME'))
+    #Fourth Conv2d+Maxpool
+    model.add(keras.layers.Conv2D(filters=256, kernel_size=(1,4), activation=tf.nn.relu, padding='SAME'))
+    model.add(keras.layers.MaxPool2D(padding='SAME'))
+    #Flatten&Fully Connected Layer
+    model.add(keras.layers.Flatten())    #fully connected layer 진입을 위해 결과값을 일렬로 펴줌
+    model.add(keras.layers.Dense(1024, activation=tf.nn.relu))   #dense layer
+    model.add(keras.layers.Dropout(0.4))    #dense layer parameter 수가 많으므로 dropout 적용
+    model.add(keras.layers.Dense(1))    #layer를 순서대로 하나씩 추가
     
-    flatten = Flatten()(conv9)    #fully connected layer 진입을 위해 결과값을 일렬로 펴줌
-    dense1 = Dense(1024, activation='relu')(flatten)   #dense layer
-    drop = Dropout(0.4)(dense1)    #dense layer parameter 수가 많으므로 dropout 적용
-    dense2 = Dense(101)(drop)
-    
-    model = Model(inputs, dense2)
+    optimizer = tf.keras.optimizers.Adam(learning_rate=learning_rate)
+    model.compile(optimizer=optimizer, loss='mse', metrics=['mae','mse'])    #regression이므로 손실함수는 mse, metric은 mse, mae
     
     return model
 
 # 3.print and save model summary
-model = unet()
+model = create_model()
 model.summary()    #model에 대한 정보 표출
 plot_model(model, to_file=os.path.join(resultmodeldir, "modelshape.png"), show_shapes=True)    #model 구조도
 modelinfodir = os.path.join(resultmodeldir, "modelinfo.txt")    #/home/bssuh/repo_bssuh_seism/program/model/dist_cnn_seq/modelinfo.txt
@@ -281,10 +232,11 @@ f = open(modelinfodir, 'a')
 f.write("model info save COMPLETE!\n")
 f.close()
 
-# 4.loss function               #결과 확인해보고 나중에 최대 우도 추정법(MLE;Maximum Likelihood Estimation)으로 바꾸는 것 고려
+#regression에서 패키지 내의 mae, mse를 사용하므로 커스텀 함수 불필요
+""" # 4.loss function               #결과 확인해보고 나중에 최대 우도 추정법(MLE;Maximum Likelihood Estimation)으로 바꾸는 것 고려
 def loss_fn(model, images, labels):    #labels=정답
     logits = model(images, training=True)    #training True로 설정하면 model의 dropout layer에서 dropout이 적용
-    cos_similarity = tf.keras.losses.cosine_similarity(y_true=labels, y_pred=logits,axis=-1)    #cosine similarity[-1,1] 계산(벡터 방향 같으면 +1, 반대면 -1, 직각이면 0)
+    cos_similarity = tf.keras.losses.cosine_similarity(y_true=labels, y_pred=logits,axis=-1)    #(-1)*cosine similarity[-1,1] 계산(벡터 방향 같으면 -1, 반대면 +1, 직각이면 0)
     cos_distance = tf.add(cos_similarity,1)    #cosine distance[0,2] 계산(벡터 방향 같으면 0, 반대면 +2, 직각이면 +1)
     loss = tf.reduce_mean(cos_distance)     #cosine distance의 평균을 loss로 반환(벡터 방향이 같을수록 loss 값이 작아짐)
     return loss
@@ -312,22 +264,72 @@ def evaluate(model, images, labels, errorlist, batchlabellist):
     errorlist.extend(error)    #기존 error 리스트에 이번 batch에서 계산된 error들 추가
     errordistance = tf.abs(error)
     mean_abs_error = tf.reduce_mean(errordistance)
-    return mean_abs_error, errorlist, batchlabellist
+    return mean_abs_error, errorlist, batchlabellist """
 
-#prediction vs label plot을 위해 랜덤 추출
-def randomselect(data, label, selectnum):
+#sample prediction vs label plot을 위해 랜덤 추출
+def randomselect(data, label, selectnum, type):
     randomindex = random.sample(range(0,(len(data)-1)),selectnum)
-    print(f"Random Selected Index : {randomindex}")
+    print(f"Random Selected {type} Index : {randomindex}")
     d={}
     selnum = 0
     for i in randomindex:
         selnum += 1
         choicedata = data[i]
-        choicelabel = np.argmax(label[i])
+        choicelabel = label[i]
         d["choice{0}".format(selnum)] = (choicedata, choicelabel, i)
     return d, randomindex
 
-#랜덤 추출한 데이터로 epoch 별로 plot
+#CustomCallback 작성
+class CustomCallback(keras.callbacks.Callback):
+    def __init__(self, model, trainchoicedict, valchoicedict):
+        self.model = model
+        self.trainchoicedict = trainchoicedict
+        self.valchoicedict = valchoicedict
+    
+    def on_train_begin(self, logs={}):
+        self.sample_traindict={}
+        for i in self.trainchoicedict.keys():
+            choicedata, choicelabel, choiceindex = self.trainchoicedict.get(i)
+            choicedata = np.expand_dims(choicedata, axis = 0)
+            samplekey = (choicedata, choicelabel, choiceindex)
+            self.sample_traindict["{0}".format(samplekey)] = []
+            
+        self.sample_valdict={}         
+        for i in self.valchoicedict.keys():
+            choicedata, choicelabel, choiceindex = self.valchoicedict.get(i)
+            choicedata = np.expand_dims(choicedata, axis = 0)
+            samplekey = (choicedata, choicelabel, choiceindex)
+            self.sample_valdict["{0}".format(samplekey)] = []        
+        
+    def on_epoch_end(self, epoch, logs={}):
+        pass
+        """ for i in self.sample_traindict.keys():
+            sampledata = i[0]
+            sampledata = np.expand_dims(sampledata, axis = 0)
+            samplelabel = i[1]
+            sampleindex = i[2]
+            print(sampledata)
+            print(samplelabel)
+            print(sampleindex)
+            predictionlist = self.sample_traindict.get(i)
+            print(predictionlist)
+            print(len(sampledata))
+            sample_predict = model.predict(sampledata)
+            predictionlist.append(sample_predict)
+            self.sample_traindict[(sampledata, samplelabel, sampleindex)] = predictionlist """ 
+
+"""         for i in self.sample_valdict.keys():
+            sampledata = i[0]
+            sampledata = np.expand_dims(sampledata, axis = 0)
+            samplelabel = i[1]
+            sampleindex = i[2]
+            predictionlist = self.sample_valdict.get(i)
+            sample_predict = model.predict(sampledata)
+            predictionlist.append(sample_predict)
+            self.sample_valdict[(sampledata, samplelabel, sampleindex)] = predictionlist
+        return self.sample_traindict, self.sample_valdict """
+
+""" #랜덤 추출한 데이터로 epoch 별로 plot
 def pred_label_plot(choicedict,model,modelname,epoch,Train_or_Test, checkpointdir):
     #prediction
     d={}
@@ -369,40 +371,59 @@ def pred_label_plot(choicedict,model,modelname,epoch,Train_or_Test, checkpointdi
     plt.savefig(modelplotdir,bbox_inches='tight',facecolor='#eeeeee')
     plt.clf()    
 
-# 6.AdamOptimizer
-optimizer = tf.keras.optimizers.Adam(learning_rate=learning_rate)
-model.compile(optimizer=optimizer,loss=loss_fn,metrics=[evaluate])
-
 # 8.create checkpoint for save
-checkpoint = tf.train.Checkpoint(cnn=model)
+checkpoint = tf.train.Checkpoint(cnn=model) """
 
-# 9.training 함수 정의
+""" # 9.training 함수 정의
 @tf.function
 def train(model, images, labels):
     grads = grad(model, images, labels)
-    optimizer.apply_gradients(zip(grads, model.trainable_variables))
+    optimizer.apply_gradients(zip(grads, model.trainable_variables)) """
 
 # 9.model 학습(modelling time measure 포함)
 f = open(modelinfodir, 'a')
 f.write(f"Total data number is {len(labellist)}, Data processing took {processtime}.\n")
+f.write(f"{len(traindataset)} for training, {len(valdataset)} for validation, {len(testdataset)} for test.\n")
 f.write(f"learning rate = {learning_rate} epoch = {training_epochs}\n")
 print('Learning started. It takes sometime.')
 f.write('Learning started. It takes sometime.\n')
 f.close()
 modelstart = time.time()
-losslist = []
-train_mae_list = []
-test_mae_list = []
+#losslist = []
+#train_mae_list = []
+#test_mae_list = []
 
 randomselectnum = 4
 f = open(modelinfodir, 'a')
-train_random_dict, trainrandomindex = randomselect(traindata,trainlabel,randomselectnum)
+train_random_dict, trainrandomindex = randomselect(traindata,trainlabel,randomselectnum, "Train")
 f.write(f"{randomselectnum} randomly selected traindata index : {trainrandomindex}\n")
-test_random_dict, testrandomindex = randomselect(testdata, testlabel, randomselectnum)
+val_random_dict, valrandomindex = randomselect(valdata,vallabel,randomselectnum, "Validation")
+f.write(f"{randomselectnum} randomly selected valdata index : {valrandomindex}\n")
+test_random_dict, testrandomindex = randomselect(testdata, testlabel, randomselectnum, "Test")
 f.write(f"{randomselectnum} randomly selected testdata index : {testrandomindex}\n")
 f.close()
 
-for epoch in range(training_epochs):    # 1 training epoch가 1 cycle
+history = model.fit(x=traindataset, 
+                    y=None,    #dataset이 (data, label) 형태이니 불필요
+                    batch_size=None,    #dataset 만들 때 이미 batch size로 잘라주었으니 여기서는 None
+                    epochs=training_epochs, 
+                    verbose=2,    #epoch 진행상황을 출력(1:progress bar, 2: 시간, loss, metric 등 숫자만 1줄로 출력)
+                    callbacks=[CustomCallback(model, train_random_dict, val_random_dict)], 
+                    validation_data=valdataset, 
+                    initial_epoch=0,    #학습이 시작되는 epoch
+                    validation_freq=1,    #validation for every(1) epochs
+)
+
+
+hist = pd.DataFrame(history.history)
+hist['epoch'] = history.epoch
+hist.tail()
+
+
+
+
+
+""" for epoch in range(training_epochs):    # 1 training epoch가 1 cycle
     sum_loss = 0.
     sum_train_mae = 0
     sum_test_mae = 0
@@ -411,7 +432,7 @@ for epoch in range(training_epochs):    # 1 training epoch가 1 cycle
     train_label_list = []
     test_label_list = []
     train_step = 0
-    test_step = 0  
+    test_step = 0
     
     for images, labels in traindataset:    # training epoch 내에서 1 batch size가 1 cycle
         train(model, images, labels)
@@ -425,7 +446,7 @@ for epoch in range(training_epochs):    # 1 training epoch가 1 cycle
     avg_train_mae = sum_train_mae / train_step    #평균 계산
     
     losslist.append(avg_loss)
-    train_mae_list.append(avg_train_mae)    
+    train_mae_list.append(avg_train_mae)
     
     for images, labels in testdataset:      # 1 epoch가 끝나면 test dataset을 넣고 모델 검증 
         mae_test, test_error_list, test_label_list = evaluate(model, images, labels, test_error_list, test_label_list)        
@@ -594,7 +615,10 @@ plt.savefig(modelplotdir,facecolor='#eeeeee')
 
 f = open(modelinfodir, 'a')
 f.write(f"Learning Finished! It took {modeltime}.")
-f.close()
+f.close() """
+modelend = time.time()
+modelsec = modelend - modelstart
+modeltime = str(datetime.timedelta(seconds=modelsec)).split(".")[0]
 print(f"Learning Finished! Learning time: {modeltime}")
 
 #개선점 train acc에 비해 test acc가 너무 낮음(데이터 갯수는 충분한데)

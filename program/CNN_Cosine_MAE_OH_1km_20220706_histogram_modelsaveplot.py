@@ -18,32 +18,32 @@
 """
 #서버 접속 상태로 top 명령어로 CPU 모니터링!!
 # 0.import libraries
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-import tensorflow as tf
-from tensorflow import keras
-from tensorflow.keras.utils import to_categorical
-from tensorflow.keras.utils import plot_model
-import numpy as np
-import matplotlib.pyplot as plt
+from __future__ import absolute_import, division, print_function
+
+import datetime
+import glob
+#import multiprocessing
+import math
 import os
+import pathlib
 # import fnmatch
 # import parmap
 import pickle
-import glob
-import pandas as pd
-from obspy import read,UTCDateTime,Trace,Stream
-from sklearn.model_selection import train_test_split, KFold
-import tqdm    #연속적인 작업의 진행률을 시각적으로 표현    for i in tqdm.tqdm(list):같은 형식
-#import multiprocessing
-import math
-import time
-import datetime
-import scipy.stats as stats
-import shutil
-import pathlib
 import random
+import shutil
+import time
+
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import scipy.stats as stats
+import tensorflow as tf
+import tqdm  # 연속적인 작업의 진행률을 시각적으로 표현    for i in tqdm.tqdm(list):같은 형식
+from obspy import Stream, Trace, UTCDateTime, read
+from sklearn.model_selection import KFold, train_test_split
+from tensorflow import keras
+from tensorflow.keras.utils import plot_model, to_categorical
+
 print(f"Tensorflow {tf.__version__}")  #Tensorflow 2.4.1(20220706)
 
 #data processing time measure start
